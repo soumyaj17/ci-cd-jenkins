@@ -148,8 +148,6 @@ app.get("/controller/pods", (req, res) => {
   `);
 });
 
-
-
 app.post("/controller/pods/create", async (req, res) => {
   const { podName, image } = req.body;
 
