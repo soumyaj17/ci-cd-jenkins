@@ -50,5 +50,18 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+    steps {
+        sh '''
+        export PATH=/usr/local/bin:$PATH
+
+        kubectl set image deployment/node-app \
+        node-app=soumyajain9413/node-app-extended-2:${BUILD_NUMBER}
+
+        kubectl rollout status deployment/node-app
+        '''
+    }
+}
+
     }
 }
