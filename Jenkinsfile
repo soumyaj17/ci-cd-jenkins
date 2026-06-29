@@ -2,24 +2,30 @@ pipeline {
 
     agent any
 
+    environment {
+        IMAGE_NAME = "soumyajain9413/node-app-extended-2"
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+
     stages {
 
-        stage('Debug Docker') {
-
+        stage('Build Image') {
             steps {
-
-                sh '''
-                echo "PATH=$PATH"
-
-                which docker || true
-
-                /usr/local/bin/docker version
-                '''
-
+                sh """
+                /usr/local/bin/docker build \
+                -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                app/
+                """
             }
+        }
 
+        stage('Docker Version') {
+            steps {
+                sh """
+                /usr/local/bin/docker images | head
+                """
+            }
         }
 
     }
-
 }
