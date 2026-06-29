@@ -11,22 +11,43 @@ pipeline {
     stages {
 
         stage('Build Image') {
-
             steps {
-
                 sh '''
-                echo $PATH
-
-                which docker
-                which docker-credential-desktop
-
                 docker build \
                 -t ${IMAGE_NAME}:${IMAGE_TAG} \
                 app/
                 '''
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
+
+                    sh '''
+                    echo $DOCKER_PASS | docker login \
+                    -u $DOCKER_USER \
+                    --password-stdin
+                    '''
+                }
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+
+                sh '''
+                docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                '''
 
             }
-
         }
 
     }
