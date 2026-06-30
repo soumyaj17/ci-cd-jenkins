@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"  
         IMAGE_NAME = "soumyajain9413/node-app-extended-2"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
@@ -51,16 +51,14 @@ pipeline {
         }
 
         stage('Deploy') {
-    steps {
-        sh '''
-        export PATH=/usr/local/bin:$PATH
+            steps {
+                sh '''
+                kubectl set image deployment/node-app \
+                node-app=soumyajain9413/node-app-extended-2:${BUILD_NUMBER}
 
-        kubectl set image deployment/node-app \
-        node-app=soumyajain9413/node-app-extended-2:${BUILD_NUMBER}
-
-        kubectl rollout status deployment/node-app
-        '''
-    }
+                kubectl rollout status deployment/node-app
+                '''
+            }
 }
 
     }
