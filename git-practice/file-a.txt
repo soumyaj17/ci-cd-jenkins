@@ -1,0 +1,2 @@
+Practice file A
+Change this line, commit, then try undo commands.

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClusterDesk — Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="/">ClusterDesk</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/dashboard.html">Dashboard</a>
+        <a href="/controller">K8s Controller</a>
+      </nav>
+    </header>
+
+    <main class="dash">
+      <h1>Overview</h1>
+      <div class="stats">
+        <div class="stat">
+          <span>Pods</span>
+          <strong id="stat-pods">—</strong>
+        </div>
+        <div class="stat">
+          <span>Deployments</span>
+          <strong id="stat-deploys">—</strong>
+        </div>
+        <div class="stat">
+          <span>Jobs</span>
+          <strong id="stat-jobs">—</strong>
+        </div>
+      </div>
+      <p class="muted">
+        Numbers are fake until you wire APIs. Edit this page, commit, then undo
+        with Git.
+      </p>
+    </main>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

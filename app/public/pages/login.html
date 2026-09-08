@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClusterDesk — Sign in</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="/">ClusterDesk</a>
+    </header>
+
+    <main class="auth">
+      <form class="panel" id="login-form">
+        <h1>Sign in</h1>
+        <p class="muted">UI only — no real auth. Use this file for Git edits.</p>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@company.com" required />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="••••••••" required />
+        </label>
+        <button class="btn primary" type="submit">Continue</button>
+        <p class="muted" id="login-status"></p>
+      </form>
+    </main>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

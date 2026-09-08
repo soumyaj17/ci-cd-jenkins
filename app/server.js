@@ -1,15 +1,12 @@
 const express = require("express");
+const path = require("path");
 const k8s = require("@kubernetes/client-node");
 const app = express();
 const PORT = 3000;
 
-
-
-
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 
 
@@ -28,32 +25,7 @@ const batchV1Api = kc.makeApiClient(k8s.BatchV1Api);
 
 
 app.get("/", (req, res) => {
-  res.send(`
-    <html>
-      <body style="
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        margin:0;
-        font-family:Arial;
-        flex-direction:column;
-      ">
-        <h1 style="
-          font-size:60px;
-          color:#007bff;
-        ">
-          Hello Soumya from AppPerfect - jenkins-1
-        </h1>
-
-        <br>
-
-        <a href="/controller">
-          Open Kubernetes Controller
-        </a>
-      </body>
-    </html>
-  `);
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 

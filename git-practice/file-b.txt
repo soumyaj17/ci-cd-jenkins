@@ -1,0 +1,2 @@
+Practice file B
+Edit this independently of file-a so you can stage one file and leave the other unstaged.

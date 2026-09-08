@@ -1,0 +1,88 @@
+Git + GitHub crash course (about 30 min)
+Work only in git-practice/. Do not force-push main unless this is a throwaway branch.
+
+--------------------------------
+0) See where you are
+--------------------------------
+git status
+git log --oneline -10
+git branch -vv
+
+--------------------------------
+1) Save work (commit)
+--------------------------------
+git add git-practice/file-a.txt
+git commit -m "practice: edit file-a"
+
+git add git-practice/
+git commit -m "practice: more dummy files"
+
+--------------------------------
+2) Undo uncommitted changes
+--------------------------------
+# discard edits in one file (not committed)
+git restore git-practice/file-a.txt
+
+# unstage a file, keep the edits
+git restore --staged git-practice/file-a.txt
+
+# stash everything, then bring it back
+git stash -u
+git stash pop
+
+--------------------------------
+3) Undo the LAST commit (choose one)
+--------------------------------
+# keep files, unstage everything  (safest "oops I committed too soon")
+git reset --soft HEAD~1
+
+# keep files as unstaged edits
+git reset --mixed HEAD~1
+# same as: git reset HEAD~1
+
+# DELETE the commit AND the file changes  (dangerous)
+git reset --hard HEAD~1
+
+--------------------------------
+4) Revert (safe on GitHub / shared branches)
+--------------------------------
+# creates a NEW commit that undoes an old one
+git log --oneline
+git revert <commit-hash>
+git push
+
+Use revert on main/shared history.
+Use reset only on commits you have NOT pushed, or only on a private branch.
+
+--------------------------------
+5) GitHub: branch, push, PR
+--------------------------------
+git checkout -b practice/undo-demo
+# make a commit
+git push -u origin practice/undo-demo
+# open a PR on GitHub, then merge or close it
+
+--------------------------------
+6) After you already pushed (do NOT reset main)
+--------------------------------
+# bad: git reset --hard + git push --force   (rewrites history others may have)
+# good: git revert <bad-commit> && git push
+
+If you must rewrite a PRACTICE branch only:
+git push --force-with-lease
+# never force-push main/master unless you own a throwaway repo
+
+--------------------------------
+7) Recover a "lost" commit after hard reset
+--------------------------------
+git reflog
+git reset --hard <commit-from-reflog>
+
+--------------------------------
+Quick map
+--------------------------------
+restore  = undo working tree / unstage
+reset    = move HEAD (rewrite local history)
+revert   = new commit that undoes an old commit (safe to push)
+stash    = shelf uncommitted work
+checkout / switch = move between branches
